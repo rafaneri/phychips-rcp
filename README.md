@@ -1,2 +1,2 @@
 # phychips-rcp
-Reader Control Protocol to Phychips PR9200
+Reader Control Protocol to RFID with Phychips PR9200
