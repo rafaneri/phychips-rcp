@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rafaneri/phychips-rcp.svg?branch=master)](https://travis-ci.org/rafaneri/phychips-rcp)
+
 # phychips-rcp
 Reader Control Protocol to RFID with Phychips PR9200
 
