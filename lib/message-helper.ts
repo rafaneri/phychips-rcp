@@ -9,13 +9,13 @@ export module MessageHelper {
     export function buildCommand(cmd: number[]): Buffer {
         cmd.push(endMark); // Push end mark
 
-        let buffer = new Buffer(cmd);
+        let buffer = Buffer.from(cmd);
         let crc16Vet = Util.toByteArray(crc16(buffer).toString(16)); // calculate crc16 of command without preamble
 
         cmd = cmd.concat(crc16Vet); // concat crc16 to cmd buffer
         cmd.unshift(preamble); // add preamble on the first position
 
-        return new Buffer(cmd);
+        return Buffer.from(cmd);
     }
 
 }
