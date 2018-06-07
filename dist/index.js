@@ -14,7 +14,7 @@ var RCP;
             0x00,
             0x00,
             0x00,
-            0x64 //RC(LSB)
+            0x00 //RC(LSB) RC (16-bit): Repeat cycle (how many times reader perform inventory round).
         ];
         return message_helper_1.MessageHelper.buildCommand(cmd);
     }

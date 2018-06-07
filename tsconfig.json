@@ -8,6 +8,6 @@
     },
     "exclude": [
         "./dist/**/*.ts",
-        "./test/**/*.ts",
+        "./test/**/*.ts"
     ]
 }
