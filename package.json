@@ -1,6 +1,6 @@
 {
   "name": "phychips-rcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Phychips Reader Control Protocol",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
