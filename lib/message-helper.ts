@@ -18,4 +18,15 @@ export module MessageHelper {
         return Buffer.from(cmd);
     }
 
+    export function unwrapperResponse(response: Buffer): any {
+        let payloadLength = response[3] + response[4];
+        let payload = response.subarray(5, 5 + payloadLength);
+
+        while (payload[payload.length - 1] === 0) {
+            payload = payload.subarray(0, payload.length - 1);
+        }
+
+        return Util.Utf8ArrayToStr(payload);
+    }
+
 }
