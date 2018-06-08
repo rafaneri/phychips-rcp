@@ -24,3 +24,18 @@ describe('stopAutoRead2 function test', () => {
         expect(result).to.deep.equal(Buffer.from([0xBB, 0x00, 0x37, 0x00, 0x00, 0x7E, 0xF3, 0x91]));
     });
 });
+
+describe('setPowerMode function test', () => {
+    it('should be a Buffer', () => {
+        const result = RCP.setPowerMode(0x00);
+        expect(result).to.be.instanceof(Buffer);
+    });
+    it('should return BB00010001007E0C28', () => {
+        const result = RCP.setPowerMode(0x00);
+        expect(result).to.deep.equal(Buffer.from([0xBB, 0x00, 0x01, 0x00, 0x01, 0x00, 0x7E, 0x0C, 0x28]));
+    });
+    it('should return BB00010001017E3F19', () => {
+        const result = RCP.setPowerMode(0x01);
+        expect(result).to.deep.equal(Buffer.from([0xBB, 0x00, 0x01, 0x00, 0x01, 0x01, 0x7E, 0x3F, 0x19]));
+    });
+});

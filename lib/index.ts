@@ -26,5 +26,15 @@ export module RCP {
         ];
         return MessageHelper.buildCommand(cmd);
     }
+
+    export function setPowerMode(arg:number): Buffer {
+        let cmd = [MessageTypes.MT_00, 
+            MessageCode.MC_SET_READER_POWER_CONTROL, 
+            0x00, //PL (MSB)
+            0x01, //PL (LSB)
+            arg
+        ];
+        return MessageHelper.buildCommand(cmd);
+    }
     
 }
