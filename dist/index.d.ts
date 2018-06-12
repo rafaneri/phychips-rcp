@@ -1,7 +1,5 @@
-/// <reference types="node" />
-export declare module RCP {
-    function startAutoRead2(): Buffer;
-    function stopAutoRead2(): Buffer;
-    function setPowerMode(arg: number): Buffer;
-    function getTemperature(): Buffer;
-}
+export { MessageTypes } from './message-types';
+export { MessageCode } from './message-code';
+export { MessageHelper } from './message-helper';
+export { Util } from './utils';
+export { ReaderControlProtocol } from './reader-control-protocol';
