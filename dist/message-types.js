@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var MessageTypes;
 (function (MessageTypes) {
-    MessageTypes[MessageTypes["MT_00"] = 0] = "MT_00";
-    MessageTypes[MessageTypes["MT_01"] = 1] = "MT_01";
-    MessageTypes[MessageTypes["MT_02"] = 2] = "MT_02";
+    MessageTypes[MessageTypes["MT_Command"] = 0] = "MT_Command";
+    MessageTypes[MessageTypes["MT_Response"] = 1] = "MT_Response";
+    MessageTypes[MessageTypes["MT_Notification"] = 2] = "MT_Notification";
 })(MessageTypes = exports.MessageTypes || (exports.MessageTypes = {}));

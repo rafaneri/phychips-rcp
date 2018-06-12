@@ -1,5 +1,5 @@
 export declare enum MessageTypes {
-    MT_00 = 0,
-    MT_01 = 1,
-    MT_02 = 2
+    MT_Command = 0,
+    MT_Response = 1,
+    MT_Notification = 2
 }
