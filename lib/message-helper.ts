@@ -1,4 +1,3 @@
-import { crc16 } from "./crc16";
 import { Util } from "./utils";
 import { MessageTypes } from "./message-types";
 
@@ -13,7 +12,7 @@ export module MessageHelper {
         args.push(endMark); // Push end mark
 
         let buffer = Buffer.from(args);
-        let crc16Vet = Util.toByteArray(crc16(buffer).toString(16)); // calculate crc16 of command without preamble
+        let crc16Vet = Util.toByteArray(Util.crc16(buffer).toString(16)); // calculate crc16 of command without preamble
 
         args = args.concat(crc16Vet); // concat crc16 to cmd buffer
         args.unshift(preamble); // add preamble on the first position

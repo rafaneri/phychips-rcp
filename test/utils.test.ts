@@ -43,3 +43,10 @@ describe('Utf8ArrayToStr function test', () => {
         expect(result).to.equals("\u0000");
     });
 });
+
+describe('crc16 function test', () => {
+    it('should be a 0', () => {
+        const result = Util.crc16(Buffer.from([0x00]), -1);
+        expect(result).to.equals(0);
+    });
+});
