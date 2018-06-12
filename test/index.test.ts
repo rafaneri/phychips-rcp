@@ -39,3 +39,10 @@ describe('setPowerMode function test', () => {
         expect(result).to.deep.equal(Buffer.from([0xBB, 0x00, 0x01, 0x00, 0x01, 0x01, 0x7E, 0x3F, 0x19]));
     });
 });
+
+describe('getTemperature function test', () => {
+    it('should be a Buffer', () => {
+        const result = RCP.getTemperature();
+        expect(result).to.be.instanceof(Buffer);
+    });
+});

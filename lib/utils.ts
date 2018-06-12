@@ -14,6 +14,16 @@ export module Util {
         return result;
     }
 
+    export function intTo2Bytes(lenght: number): number[] {
+        let bytes = new Array(1);
+
+        bytes[1] = lenght & (255);
+        lenght = lenght >> 8
+        bytes[0] = lenght & (255);
+
+        return bytes;
+    }
+
     // http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt
 
     /* utf.js - UTF-8 <=> UTF-16 convertion
@@ -23,7 +33,7 @@ export module Util {
      * LastModified: Dec 25 1999
      * This library is free.  You can redistribute it and/or modify it.
      */
-    export function Utf8ArrayToStr(array: Uint8Array) : string {
+    export function Utf8ArrayToStr(array: Uint8Array): string {
         var out, i, len, c;
         var char2, char3;
 
@@ -33,7 +43,10 @@ export module Util {
         while (i < len) {
             c = array[i++];
             switch (c >> 4) {
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+                case 0: 
+                case 1: 
+                case 2: 
+                case 3: case 4: case 5: case 6: case 7:
                     // 0xxxxxxx
                     out += String.fromCharCode(c);
                     break;
