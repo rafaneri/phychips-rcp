@@ -45,7 +45,7 @@ var Packet = /** @class */ (function () {
     Packet.from = function (buffer) {
         var payloadLength = buffer[3] + buffer[4];
         var args = buffer.subarray(5, 5 + payloadLength);
-        while (args[args.length - 1] === 0) {
+        while (args[args.length - 1] === 0 && args.length > 1) {
             args = args.subarray(0, args.length - 1);
         }
         var array = [].slice.call(args);

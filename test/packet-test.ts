@@ -27,3 +27,10 @@ describe('data_int function test', () => {
         expect(result.data_int()).to.equals(31);
     });
 });
+
+describe('from function test', () => {
+    it('should be 0', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x00, 0x01, 0x00, 0x7e, 0xcc, 0x60]));
+        expect(result.args).to.deep.equals([0]);
+    });
+});
