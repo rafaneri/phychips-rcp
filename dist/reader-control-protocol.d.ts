@@ -1,7 +1,8 @@
-/// <reference types="node" />
+import { Packet } from './packet';
 export declare module ReaderControlProtocol {
-    function startAutoRead2(): Buffer;
-    function stopAutoRead2(): Buffer;
-    function setPowerMode(arg: number): Buffer;
-    function getTemperature(): Buffer;
+    function startAutoRead2(): Packet;
+    function stopAutoRead2(): Packet;
+    function setPowerMode(arg: number): Packet;
+    function setAntiCollisionMode(arg: number): Packet;
+    function getTemperature(): Packet;
 }

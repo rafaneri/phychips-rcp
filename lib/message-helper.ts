@@ -20,23 +20,27 @@ export module MessageHelper {
         return Buffer.from(args);
     }
 
-    export function unwrapperResponse(response: Buffer): any {
+    export function unwrapperResponse(response: Buffer): Buffer {
         if (response.length < 2 || response[1] != MessageTypes.MT_Response) {
-            return "";
+            return Buffer.from([]);
         }
 
         return unwrapperPacket(response);
     }
 
-    export function unwrapperNotification(notification: Buffer): any {
+    export function unwrapperNotification(notification: Buffer): Buffer {
         if (notification.length < 2 || notification[1] != MessageTypes.MT_Notification) {
-            return "";
+            return Buffer.from([]);
         }
 
         return unwrapperPacket(notification);
     }
 
-    function unwrapperPacket(packet: Buffer): string {
+    export function getStringData(args: Buffer) : string {
+        return Util.Utf8ArrayToStr(args);
+    }
+
+    function unwrapperPacket(packet: Buffer): Buffer {
         let payloadLength = packet[3] + packet[4];
         let payload = packet.subarray(5, 5 + payloadLength);
 
@@ -44,7 +48,7 @@ export module MessageHelper {
             payload = payload.subarray(0, payload.length - 1);
         }
 
-        return Util.Utf8ArrayToStr(payload);
+        return Buffer.from(payload);
     }
 
 }

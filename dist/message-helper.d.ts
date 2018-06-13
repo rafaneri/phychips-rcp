@@ -1,6 +1,7 @@
 /// <reference types="node" />
 export declare module MessageHelper {
     function buildCommand(header: number[], args?: number[]): Buffer;
-    function unwrapperResponse(response: Buffer): any;
-    function unwrapperNotification(notification: Buffer): any;
+    function unwrapperResponse(response: Buffer): Buffer;
+    function unwrapperNotification(notification: Buffer): Buffer;
+    function getStringData(args: Buffer): string;
 }

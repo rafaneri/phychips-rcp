@@ -19,24 +19,28 @@ var MessageHelper;
     MessageHelper.buildCommand = buildCommand;
     function unwrapperResponse(response) {
         if (response.length < 2 || response[1] != message_types_1.MessageTypes.MT_Response) {
-            return "";
+            return Buffer.from([]);
         }
         return unwrapperPacket(response);
     }
     MessageHelper.unwrapperResponse = unwrapperResponse;
     function unwrapperNotification(notification) {
         if (notification.length < 2 || notification[1] != message_types_1.MessageTypes.MT_Notification) {
-            return "";
+            return Buffer.from([]);
         }
         return unwrapperPacket(notification);
     }
     MessageHelper.unwrapperNotification = unwrapperNotification;
+    function getStringData(args) {
+        return utils_1.Util.Utf8ArrayToStr(args);
+    }
+    MessageHelper.getStringData = getStringData;
     function unwrapperPacket(packet) {
         var payloadLength = packet[3] + packet[4];
         var payload = packet.subarray(5, 5 + payloadLength);
         while (payload[payload.length - 1] === 0) {
             payload = payload.subarray(0, payload.length - 1);
         }
-        return utils_1.Util.Utf8ArrayToStr(payload);
+        return Buffer.from(payload);
     }
 })(MessageHelper = exports.MessageHelper || (exports.MessageHelper = {}));
