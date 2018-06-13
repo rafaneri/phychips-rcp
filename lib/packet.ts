@@ -12,7 +12,8 @@ export class Packet {
     constructor(
         public messageType: MessageTypes,
         public messageCode: MessageCode,
-        public args?: number[]) { }
+        public args?: number[],
+        public response?: Buffer) { }
 
     command(): Buffer {
         if (this.bufferCommand === undefined) {

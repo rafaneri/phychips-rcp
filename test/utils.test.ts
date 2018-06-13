@@ -45,8 +45,12 @@ describe('Utf8ArrayToStr function test', () => {
 });
 
 describe('crc16 function test', () => {
-    it('should be a 0', () => {
+    it('should be 0', () => {
         const result = Util.crc16(Buffer.from([0x00]), -1);
         expect(result).to.equals(0);
+    });
+    it('should be 54026', () => {
+        const result = Util.crc16(Buffer.from([0x01, 0x0D, 0x00, 0x02, 0xE0, 0x20, 0x7E]));
+        expect(result).to.equals(54026);
     });
 });
