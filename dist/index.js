@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var packet_1 = require("./packet");
+exports.Packet = packet_1.Packet;
 var message_types_1 = require("./message-types");
 exports.MessageTypes = message_types_1.MessageTypes;
 var message_code_1 = require("./message-code");
