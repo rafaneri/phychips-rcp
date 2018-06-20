@@ -1,6 +1,8 @@
 import { Packet } from './../lib/packet';
 import { expect } from 'chai';
 import { Util } from '../lib/utils';
+import { MessageTypes } from '../lib/message-types';
+import { MessageCode } from '../lib/message-code';
 
 describe('data_str function test', () => {
     it('should be Empty', () => {
@@ -32,5 +34,51 @@ describe('from function test', () => {
     it('should be 0', () => {
         const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x00, 0x01, 0x00, 0x7e, 0xcc, 0x60]));
         expect(result.args).to.deep.equals([0]);
+    });
+});
+
+describe('command function test', () => {
+    let args = [
+        0x02, //Reserve: type B tag (0x01), type C Tag (0x02)
+        0x00, //MTNU: maximum number of tag to read
+        0x00, //MTIME: maximum elapsed time to tagging (sec)
+        0x00, //RC(MSB)
+        0x00 //RC(LSB) RC (16-bit): Repeat cycle (how many times reader perform inventory round).
+    ];
+    it('should be BB0036000502000000007E220D', () => {
+        const result = new Packet(MessageTypes.MT_Command,
+            MessageCode.MC_START_AUTO_READ2, args);
+        result.command();
+        expect(result.command()).to.deep.equal(Buffer.from([0xBB, 0x00, 0x36, 0x00, 0x05, 0x02, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x22, 0x0D]));
+    });
+});
+
+describe('isValid function test', () => {
+    it('should be true', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x01, 0xff, 0x00, 0x01, 0x0b, 0x7e, 0x65, 0x8c])).isValid();
+        expect(result).to.equals(true);
+    });
+    it('should be false', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x00, 0x01, 0x00, 0x7e, 0xcc, 0x60, 0xbb])).isValid();
+        expect(result).to.equals(false);
+    });
+    it('should be false', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x01, 0x35, 0x35])).isValid();
+        expect(result).to.equals(false);
+    });
+});
+
+describe('hasError function test', () => {
+    it('should be true', () => {
+        const result = Packet.from(Buffer.from([0xBB, 0x01, 0xFF, 0x00, 0x01, 0x0B, 0x7E, 0x65, 0x8C])).hasError();
+        expect(result).to.equals(true);
+    });
+    it('should be false', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x00, 0x01, 0x00, 0x7e, 0xcc, 0x60])).hasError();
+        expect(result).to.equals(false);
+    });
+    it('should be false', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x01, 0x35, 0x35])).hasError();
+        expect(result).to.equals(false);
     });
 });
