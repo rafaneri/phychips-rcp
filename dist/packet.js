@@ -1,17 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var message_code_1 = require("./message-code");
 var utils_1 = require("./utils");
+var _ = require("lodash");
 var Packet = /** @class */ (function () {
-    function Packet(messageType, messageCode, args) {
+    function Packet(messageType, messageCode, args, response) {
         this.messageType = messageType;
         this.messageCode = messageCode;
         this.args = args;
+        this.response = response;
         this.preamble = 0xBB;
         this.endMark = 0x7E;
         this.payload = [];
+        this.bufferCommand = Buffer.from([]);
     }
     Packet.prototype.command = function () {
-        if (this.bufferCommand === undefined) {
+        if (this.bufferCommand.length === 0) {
             if (this.args === undefined) {
                 this.args = [];
             }
@@ -41,6 +45,19 @@ var Packet = /** @class */ (function () {
         else {
             return 0;
         }
+    };
+    Packet.prototype.isValid = function () {
+        if (this.bufferCommand.length < 8)
+            return false;
+        var bf = Buffer.from(this.bufferCommand.subarray(1, this.bufferCommand.length - 2));
+        var orCk = [].slice.call(this.bufferCommand.subarray(this.bufferCommand.length - 2));
+        var ck = utils_1.Util.toByteArray(utils_1.Util.crc16(bf).toString(16));
+        return _.isEqual(ck, orCk);
+    };
+    Packet.prototype.hasError = function () {
+        if (this.bufferCommand.length < 8)
+            return false;
+        return this.messageCode === message_code_1.MessageCode.MC_COMMAND_FAILURE;
     };
     Packet.from = function (buffer) {
         var payloadLength = buffer[3] + buffer[4];
