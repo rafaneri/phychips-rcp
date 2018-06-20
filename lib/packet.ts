@@ -1,22 +1,25 @@
 import { MessageCode } from './message-code';
 import { MessageTypes } from "./message-types";
 import { Util } from './utils';
+import _ = require('lodash');
 
 export class Packet {
 
     private preamble: number = 0xBB;
     private endMark: number = 0x7E;
-    private bufferCommand: any;
+    private bufferCommand: Buffer;
     public payload: number[] = [];
 
     constructor(
         public messageType: MessageTypes,
         public messageCode: MessageCode,
         public args?: number[],
-        public response?: Buffer) { }
+        public response?: Buffer) {
+        this.bufferCommand = Buffer.from([]);
+    }
 
     command(): Buffer {
-        if (this.bufferCommand === undefined) {
+        if (this.bufferCommand.length === 0) {
             if (this.args === undefined) {
                 this.args = [];
             }
@@ -50,6 +53,24 @@ export class Packet {
         } else {
             return 0;
         }
+    }
+
+    isValid(): boolean {
+        if (this.bufferCommand.length < 8)
+            return false;
+
+        let bf = Buffer.from(this.bufferCommand.subarray(1, this.bufferCommand.length - 2));
+        let orCk = [].slice.call(this.bufferCommand.subarray(this.bufferCommand.length - 2));
+        let ck = Util.toByteArray(Util.crc16(bf).toString(16));
+        
+        return _.isEqual(ck, orCk);
+    }
+
+    hasError(): boolean {
+        if (this.bufferCommand.length < 8)
+            return false;
+
+        return this.messageCode === MessageCode.MC_COMMAND_FAILURE;
     }
 
     static from(buffer: Buffer): Packet {
