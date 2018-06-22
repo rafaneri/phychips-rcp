@@ -30,6 +30,17 @@ describe('data_int function test', () => {
     });
 });
 
+describe('getEpc function test', () => {
+    it('should be 00001660160155158075', () => {
+        const result = Packet.from(Buffer.from([0xbb, 0x02, 0x22, 0x00, 0x0e, 0x30, 0x00, 0xe2, 0x00, 0x00, 0x16, 0x60, 0x16, 0x01, 0x55, 0x15, 0x80, 0x75, 0x3d, 0x7e, 0x5c, 0x46]));
+        expect(result.getEpc()).to.deep.equals(Buffer.from([0x00, 0x00, 0x16, 0x60, 0x16, 0x01, 0x55, 0x15, 0x80, 0x75]));
+    });
+    it('should be Empty', () => {
+        const result = Packet.from(Buffer.from([]));
+        expect(result.getEpc()).to.deep.equals(Buffer.from([]));
+    });
+});
+
 describe('from function test', () => {
     it('should be 0', () => {
         const result = Packet.from(Buffer.from([0xbb, 0x01, 0x35, 0x00, 0x01, 0x00, 0x7e, 0xcc, 0x60]));

@@ -55,6 +55,15 @@ export class Packet {
         }
     }
 
+    getEpc(): Buffer {
+        if (this.args !== undefined && this.args.length > 0) {
+            let epc = Buffer.from(this.args).subarray(3, this.args.length - 1);
+            return Buffer.from(epc);
+        } else {
+            return Buffer.from([]);
+        }
+    }
+
     isValid(): boolean {
         if (this.bufferCommand.length < 8)
             return false;
@@ -62,7 +71,7 @@ export class Packet {
         let bf = Buffer.from(this.bufferCommand.subarray(1, this.bufferCommand.length - 2));
         let orCk = [].slice.call(this.bufferCommand.subarray(this.bufferCommand.length - 2));
         let ck = Util.toByteArray(Util.crc16(bf).toString(16));
-        
+
         return _.isEqual(ck, orCk);
     }
 

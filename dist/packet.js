@@ -46,6 +46,15 @@ var Packet = /** @class */ (function () {
             return 0;
         }
     };
+    Packet.prototype.getEpc = function () {
+        if (this.args !== undefined && this.args.length > 0) {
+            var epc = Buffer.from(this.args).subarray(3, this.args.length - 1);
+            return Buffer.from(epc);
+        }
+        else {
+            return Buffer.from([]);
+        }
+    };
     Packet.prototype.isValid = function () {
         if (this.bufferCommand.length < 8)
             return false;

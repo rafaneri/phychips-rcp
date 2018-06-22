@@ -1,4 +1,5 @@
 export { Packet } from './packet';
+export { RcpManager } from './rcp-manager';
 export { MessageTypes } from './message-types';
 export { MessageCode } from './message-code';
 export { MessageHelper } from './message-helper';

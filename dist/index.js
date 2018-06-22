@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var packet_1 = require("./packet");
 exports.Packet = packet_1.Packet;
+var rcp_manager_1 = require("./rcp-manager");
+exports.RcpManager = rcp_manager_1.RcpManager;
 var message_types_1 = require("./message-types");
 exports.MessageTypes = message_types_1.MessageTypes;
 var message_code_1 = require("./message-code");

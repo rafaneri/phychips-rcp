@@ -14,6 +14,7 @@ export declare class Packet {
     command(): Buffer;
     data_str(): string;
     data_int(): number;
+    getEpc(): Buffer;
     isValid(): boolean;
     hasError(): boolean;
     static from(buffer: Buffer): Packet;
