@@ -10,18 +10,11 @@ export class RcpManager extends EventEmitter {
     private rcpReceivedPacketCrcError: boolean;
     private static instance: RcpManager;
 
-    private constructor() {
+    constructor() {
         super();
         this.byteRxPkt = Buffer.from([]);
         this.rcpReceivedPacket = false;
         this.rcpReceivedPacketCrcError = false;
-    }
-
-    static getInstance() {
-        if (!RcpManager.instance) {
-            RcpManager.instance = new RcpManager();
-        }
-        return RcpManager.instance;
     }
 
     dataReceived(data: Buffer): void {

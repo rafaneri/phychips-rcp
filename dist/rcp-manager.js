@@ -23,12 +23,6 @@ var RcpManager = /** @class */ (function (_super) {
         _this.rcpReceivedPacketCrcError = false;
         return _this;
     }
-    RcpManager.getInstance = function () {
-        if (!RcpManager.instance) {
-            RcpManager.instance = new RcpManager();
-        }
-        return RcpManager.instance;
-    };
     RcpManager.prototype.dataReceived = function (data) {
         if (data.length != 0) {
             this.byteRxPkt = Buffer.concat([this.byteRxPkt, data], this.byteRxPkt.length + data.length);

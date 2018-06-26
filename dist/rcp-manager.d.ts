@@ -7,8 +7,7 @@ export declare class RcpManager extends EventEmitter {
     private rcpReceivedPacket;
     private rcpReceivedPacketCrcError;
     private static instance;
-    private constructor();
-    static getInstance(): RcpManager;
+    constructor();
     dataReceived(data: Buffer): void;
     private parseRxData;
 }

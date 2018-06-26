@@ -5,7 +5,7 @@ import { expect } from 'chai';
 
 describe('getInstance function test', () => {
     it('should be instance of RcpManager', () => {
-        const result = RcpManager.getInstance();
+        const result = new RcpManager();
         expect(result).to.be.instanceof(RcpManager);
     });
 });
@@ -13,21 +13,21 @@ describe('getInstance function test', () => {
 describe('dataReceived function test', () => {
     it('should invoke the callback', () => {
         let spy = sinon.spy()
-        const instance = RcpManager.getInstance();
+        const instance = new RcpManager();
         instance.on('packet', spy);
         instance.dataReceived(Buffer.from([0xbb, 0x02, 0x22, 0x00, 0x0e, 0x30, 0x00, 0xe2, 0x00, 0x00, 0x16, 0x60, 0x16, 0x01, 0x55, 0x15, 0x80, 0x75, 0x3d, 0x7e, 0x5c, 0x46]));
         sinon.assert.calledOnce(spy);
     });
     it('should be not invoke the callback', () => {
         let spy = sinon.spy()
-        const instance = RcpManager.getInstance();
+        const instance = new RcpManager();
         instance.on('packet', spy);
         instance.dataReceived(Buffer.from([]));
         sinon.assert.notCalled(spy);
     });
     it('should invoke the callback args', () => {
         let spy = sinon.spy()
-        const instance = RcpManager.getInstance();
+        const instance = new RcpManager();
         instance.on('packet', spy);
         instance.dataReceived(Buffer.from([0xbb, 0x01, 0xff, 0x00, 0x01, 0x0b, 0x7e, 0x65, 0x8c]));
         instance.dataReceived(Buffer.from([0xbb, 0x02, 0x22, 0x00, 0x0e, 0x30, 0x00, 0xe2, 0x00, 0x00, 0x16, 0x60, 0x16, 0x01, 0x55, 0x18, 0x90, 0x54, 0x93, 0x7e, 0xe9, 0x1c]));
