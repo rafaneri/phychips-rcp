@@ -6,11 +6,13 @@ var message_code_1 = require("./message-code");
 var message_helper_1 = require("./message-helper");
 var ReaderControlProtocol;
 (function (ReaderControlProtocol) {
-    function startAutoRead2() {
+    function startAutoRead2(tag, sec) {
+        if (tag === void 0) { tag = 0; }
+        if (sec === void 0) { sec = 0; }
         var args = [
             0x02,
-            0x00,
-            0x00,
+            tag,
+            sec,
             0x00,
             0x00 //RC(LSB) RC (16-bit): Repeat cycle (how many times reader perform inventory round).
         ];

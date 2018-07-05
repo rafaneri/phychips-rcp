@@ -1,6 +1,6 @@
 import { Packet } from './packet';
 export declare module ReaderControlProtocol {
-    function startAutoRead2(): Packet;
+    function startAutoRead2(tag?: number, sec?: number): Packet;
     function stopAutoRead2(): Packet;
     function setPowerMode(arg: number): Packet;
     function setAntiCollisionMode(arg: number): Packet;
