@@ -57,8 +57,7 @@ export class Packet {
 
     getEpc(): Buffer {
         if (this.args !== undefined && this.args.length > 0) {
-            let epc = Buffer.from(this.args).subarray(3, this.args.length - 1);
-            return Buffer.from(epc);
+            return Buffer.from(this.args);
         } else {
             return Buffer.from([]);
         }
