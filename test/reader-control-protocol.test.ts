@@ -13,6 +13,10 @@ describe('startAutoRead2 function test', () => {
         const result = ReaderControlProtocol.startAutoRead2();
         expect(result.command()).to.deep.equal(Buffer.from([0xBB, 0x00, 0x36, 0x00, 0x05, 0x02, 0x00, 0x00, 0x00, 0x00, 0x7E, 0x22, 0x0D]));
     });
+    it('should return BB0036000502000A00007E4AA6', () => {
+        const result = ReaderControlProtocol.startAutoRead2(0, 10);
+        expect(result.command()).to.deep.equal(Buffer.from([0xBB, 0x00, 0x36, 0x00, 0x05, 0x02, 0x00, 0x0A, 0x00, 0x00, 0x7E, 0x4A, 0xA6]));
+    });
 });
 
 describe('stopAutoRead2 function test', () => {

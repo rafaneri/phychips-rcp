@@ -5,11 +5,11 @@ import { MessageHelper } from './message-helper';
 
 export module ReaderControlProtocol {
 
-    export function startAutoRead2(): Packet {
+    export function startAutoRead2(tag:number = 0, sec: number = 0): Packet {
         let args = [
             0x02, //Reserve: type B tag (0x01), type C Tag (0x02)
-            0x00, //MTNU: maximum number of tag to read
-            0x00, //MTIME: maximum elapsed time to tagging (sec)
+            tag, //MTNU: maximum number of tag to read
+            sec, //MTIME: maximum elapsed time to tagging (sec)
             0x00, //RC(MSB)
             0x00 //RC(LSB) RC (16-bit): Repeat cycle (how many times reader perform inventory round).
         ];
