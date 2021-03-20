@@ -57,7 +57,10 @@ export class Packet {
 
     getEpc(): Buffer {
         if (this.args !== undefined && this.args.length > 0) {
-            return Buffer.from(this.args);
+            // REMOVE THE PC Bytes
+            const epc = this.args;
+            epc.splice(0, 2);
+            return Buffer.from(epc);
         } else {
             return Buffer.from([]);
         }
@@ -96,4 +99,4 @@ export class Packet {
         return packet;
     }
 
-} 
+}
