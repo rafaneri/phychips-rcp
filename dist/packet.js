@@ -48,7 +48,10 @@ var Packet = /** @class */ (function () {
     };
     Packet.prototype.getEpc = function () {
         if (this.args !== undefined && this.args.length > 0) {
-            return Buffer.from(this.args);
+            // REMOVE THE PC Bytes
+            var epc = this.args;
+            epc.splice(0, 2);
+            return Buffer.from(epc);
         }
         else {
             return Buffer.from([]);
