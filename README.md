@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/rafaneri/phychips-rcp.svg?branch=master)](https://travis-ci.org/rafaneri/phychips-rcp)
 [![Coverage Status](https://coveralls.io/repos/github/rafaneri/phychips-rcp/badge.svg?branch=master)](https://coveralls.io/github/rafaneri/phychips-rcp?branch=master)
 
-# phychips-rcp
-Reader Control Protocol to RFID with Phychips PR9200
+# RFID-rcp
+Reader Control Protocol to RFID with Phychips PR9200 or VANCH
 
 ## Installation 
 ```sh
